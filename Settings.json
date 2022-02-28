@@ -1,0 +1,52 @@
+{
+  "IgnoredRepos": {
+    "FolderName": "",
+    "Items": [
+      "cpp-project",
+      "CS-GO-cfg",
+      "ehonnef.github.io",
+      "simple-cpp-project"
+    ]
+  },
+  "SmallRepos": {
+    "FolderName": "_smallportfolio",
+    "Items": [
+      "afk-clicker",
+      "firefox-userContent-css",
+      "lottery-analysis",
+      "personal-site-updater-py",
+      "nubank-getter-service",
+      "python-snakes",
+      "tibia-screenshot-organizer",
+      "simple-get-post-python-server",
+      "useful-commands"
+    ]
+  },
+  "UniProjects": {
+    "FolderName": "_uniportfolio",
+    "Items": [
+      "epos-arm-a9",
+      "sistema-grafico-interativo",
+      "fashion-mnist",
+      "grafo-simples",
+      "information-extraction",
+      "lista-encadeada",
+      "metodos-busca",
+      "ROBa",
+      "lottery-smart-contract"
+    ]
+  },
+  "PortfolioRepos": {
+    "FolderName": "_portfolio",
+    "Items": [
+      "logger-thread",
+      "thread-cpp",
+      "big-int-cpp",
+      "information-extraction",
+      "Mafs",
+      "ROBa",
+      "string-operations-cpp"
+    ]
+  },
+  "ProcessedRepos": []
+}
