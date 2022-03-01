@@ -14,10 +14,18 @@ def GetRepos():
 def ReadSettings():
   return json.load(open("./Settings.json", "r", encoding="utf8"))
 
+
 def WriteSettings(Settings):
   json.dump(Settings, open("./Settings.json", "w+", encoding="utf8"))
 
+
 def MDFileContent(RepoObj):
+  Description = RepoObj["description"]
+  if Description is None or Description == "None" or Description == "":
+    Description = "W.I.P."
+
+  Description = Description.replace('"', '\\"')
+
   FileContent = """---
 title: "{}"
 excerpt: "{}"
@@ -26,7 +34,7 @@ link: {}
 ---
 
 {}
-""".format(RepoObj["name"], RepoObj["description"], RepoObj["language"], RepoObj["html_url"], RepoObj["description"])
+""".format(RepoObj["name"], Description, RepoObj["language"], RepoObj["html_url"], Description)
   return FileContent
 
 
@@ -46,6 +54,10 @@ def CreateMDFile(RepoObj, DestFolder):
   return True
 
 
+def IsWIPRepo(RepoObj):
+  return (RepoObj["description"] is None or RepoObj["description"] == "None" or RepoObj["description"] == "")
+
+
 if __name__ == "__main__":
   Data = GetRepos()
   Settings = ReadSettings()
@@ -53,7 +65,7 @@ if __name__ == "__main__":
   def _GetFolder(RepoObj):
     RtnValues = []
     for Key in Settings.keys():
-      if Key != "ProcessedRepos":
+      if not Key in ["ProcessedRepos", "LanguagesAliases"]:
         if RepoObj["name"] in Settings[Key]["Items"]:
           RtnValues.append(Settings[Key]["FolderName"])
     return set(RtnValues)
@@ -63,14 +75,16 @@ if __name__ == "__main__":
     if (not Repo["name"] in Settings["ProcessedRepos"]) and (not Repo["name"] in Settings["IgnoredRepos"]["Items"]):
       Folders = _GetFolder(Repo)
 
-      if len(Folders) == 0:
-        print("Set category for repository: {}".format(Repo["name"]))
+      if len(Folders) == 0 or IsWIPRepo(Repo):
+        print("No category or WIP repo: {}".format(Repo["name"]))
         PrintInfo = True
       else:
         Settings["ProcessedRepos"].append(Repo["name"])
+        if Repo["language"] in Settings["LanguagesAliases"].keys():
+          Repo["language"] = Settings["LanguagesAliases"][Repo["language"]]
         for Folder in Folders:
           CreateMDFile(Repo, Folder)
 
   if PrintInfo:
-    print("Categorize those repos in the Settings.json file, then rerun this program")
+    print("===\nCategorize those repos in the Settings.json file, then rerun this program")
   WriteSettings(Settings)

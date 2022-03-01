@@ -1,13 +1,4 @@
 {
-  "IgnoredRepos": {
-    "FolderName": "",
-    "Items": [
-      "cpp-project",
-      "CS-GO-cfg",
-      "ehonnef.github.io",
-      "simple-cpp-project"
-    ]
-  },
   "SmallRepos": {
     "FolderName": "_smallportfolio",
     "Items": [
@@ -47,6 +38,19 @@
       "ROBa",
       "string-operations-cpp"
     ]
+  },
+  "IgnoredRepos": {
+    "FolderName": "",
+    "Items": [
+      "cpp-project",
+      "CS-GO-cfg",
+      "ehonnef.github.io",
+      "simple-cpp-project"
+    ]
+  },
+  "LanguagesAliases": {
+    "CMake": "C++",
+    "Jupyter Notebook": "Python"
   },
   "ProcessedRepos": []
 }
